@@ -42,7 +42,10 @@ public class App {
         Map<String, Ticket> map = tickets.stream()
                 .reduce(new HashMap<>(), App::putIfFirstOrFaster, (((stringTicketHashMap, stringTicketHashMap2) -> stringTicketHashMap2)));
 
-        map.keySet().forEach(key -> System.out.println(key + "\n" + map.get(key)));
+        map.keySet().forEach(key -> {
+            System.out.printf("%s\n%s\nDuration - %d min%n", key, map.get(key),
+                    DurationCalculator.getFlightDurationMinutes(map.get(key)));
+        });
     }
 
     public static HashMap<String, Ticket> putIfFirstOrFaster(HashMap<String, Ticket> stringTicketMap, Ticket ticket) {
